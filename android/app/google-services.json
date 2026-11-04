@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "614448013280",
+    "project_id": "minimal-chatapp-5b1d7",
+    "storage_bucket": "minimal-chatapp-5b1d7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:614448013280:android:366469c1c2226818bb5585",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "614448013280-4n7crggqjv92q5amloivg8g4ajad1d42.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuEhKWA0BsNnNTJcdhykpW2qLqiHzfkuQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "614448013280-4n7crggqjv92q5amloivg8g4ajad1d42.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
