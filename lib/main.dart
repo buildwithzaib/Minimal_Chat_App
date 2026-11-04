@@ -1,4 +1,8 @@
+// ignore_for_file: unused_import
+
 import 'package:chat_app/Pages/loginpage.dart';
+import 'package:chat_app/Pages/register_page.dart';
+import 'package:chat_app/auth/login_or_reguster.dart';
 import 'package:chat_app/theme/light_mode.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Loginpage(),
+      home: LoginOrRegister(),
       theme: lightMode,
     );
   }
