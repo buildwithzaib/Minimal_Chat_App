@@ -1,6 +1,7 @@
 import 'package:chat_app/auth/auth_service.dart';
 import 'package:chat_app/components/my_textfield.dart';
 import 'package:chat_app/components/mybutton.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
@@ -13,31 +14,57 @@ class RegisterPage extends StatelessWidget {
   RegisterPage({super.key, required this.onTap});
 
   // register page method
-  void register(BuildContext context) {
+  void register(BuildContext context) async {
     // get auth service
-    final _auth = AuthService();
+    final authService = AuthService();
 
     // if the password match then create user.
     if (passwordcontroller.text == confirmpasswordcontroller.text) {
       try {
-        _auth.signInWithEmailPassword(
-          emailcontroller.text,
+        await authService.signUpWithEmailPassword(
+          emailcontroller.text.trim(),
           passwordcontroller.text,
         );
+        if (!context.mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Account created successfully.")),
+        );
       } catch (e) {
+        if (!context.mounted) return;
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(title: Text(e.toString())),
+          builder: (context) => AlertDialog(
+            title: const Text("Registration failed"),
+            content: Text(_registrationErrorMessage(e)),
+          ),
         );
       }
     }
-
     // password dont match then we show an error
-    showDialog(
-      context: context,
-      builder: (context) =>
-          const AlertDialog(title: Text("Password dont match")),
-    );
+    else {
+      showDialog(
+        context: context,
+        builder: (context) =>
+            const AlertDialog(title: Text("Password dont match")),
+      );
+    }
+  }
+
+  String _registrationErrorMessage(Object error) {
+    if (error is! FirebaseAuthException) return error.toString();
+
+    return switch (error.code) {
+      'operation-not-allowed' =>
+        'Email/password sign-up is disabled. Enable it in Firebase Console under Authentication > Sign-in method.',
+      'email-already-in-use' => 'An account already exists for this email.',
+      'invalid-email' => 'Enter a valid email address.',
+      'weak-password' => 'Choose a stronger password (at least 6 characters).',
+      'network-request-failed' =>
+        'Could not connect to Firebase. Check your internet connection and try again.',
+      'too-many-requests' =>
+        'Too many attempts. Please wait a while and try again.',
+      _ => 'Firebase error (${error.code}): ${error.message ?? 'Please try again.'}',
+    };
   }
 
   @override
