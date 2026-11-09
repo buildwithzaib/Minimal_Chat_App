@@ -66,9 +66,11 @@ class Loginpage extends StatelessWidget {
               hintText: "Email",
               obsecureText: false,
               controller: emailcontroller,
+              focusNode: FocusNode(),
             ),
             SizedBox(height: 20),
             MyTextfield(
+              focusNode: FocusNode(),
               hintText: "Password",
               obsecureText: true,
               controller: passwordcontroller,

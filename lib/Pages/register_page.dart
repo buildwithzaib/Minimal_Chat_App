@@ -54,16 +54,15 @@ class RegisterPage extends StatelessWidget {
     if (error is! FirebaseAuthException) return error.toString();
 
     return switch (error.code) {
-      'operation-not-allowed' =>
-        'Email/password sign-up is disabled. Enable it in Firebase Console under Authentication > Sign-in method.',
+      'operation-not-allowed' => 'Email/password sign-up is disabled. Enable it in Firebase Console under Authentication > Sign-in method.',
       'email-already-in-use' => 'An account already exists for this email.',
       'invalid-email' => 'Enter a valid email address.',
       'weak-password' => 'Choose a stronger password (at least 6 characters).',
-      'network-request-failed' =>
-        'Could not connect to Firebase. Check your internet connection and try again.',
+      'network-request-failed' => 'Could not connect to Firebase. Check your internet connection and try again.',
       'too-many-requests' =>
         'Too many attempts. Please wait a while and try again.',
-      _ => 'Firebase error (${error.code}): ${error.message ?? 'Please try again.'}',
+      _ =>
+        'Firebase error (${error.code}): ${error.message ?? 'Please try again.'}',
     };
   }
 
@@ -96,12 +95,14 @@ class RegisterPage extends StatelessWidget {
 
             // text fields
             MyTextfield(
+              focusNode: FocusNode(),
               hintText: "Email",
               obsecureText: false,
               controller: emailcontroller,
             ),
             SizedBox(height: 20),
             MyTextfield(
+              focusNode: FocusNode(),
               hintText: "Password",
               obsecureText: true,
               controller: passwordcontroller,
@@ -109,6 +110,7 @@ class RegisterPage extends StatelessWidget {
 
             SizedBox(height: 20),
             MyTextfield(
+              focusNode: FocusNode(),
               hintText: "Confirm Password",
               obsecureText: true,
               controller: confirmpasswordcontroller,
